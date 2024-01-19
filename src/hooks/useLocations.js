@@ -4,16 +4,18 @@ import { LOCATIONS_LIMIT, LOG, ZIPCODE_REGEX } from "../utils/constants";
 import { Location } from "../models/location.model";
 import { getByZipCode } from "zips"
 
-export function useLocations(zipCode, radiusInMiles) {
+export function useLocations(zipCode, radiusInMiles, tryAgain) {
     const [locations, setLocations] = useState([])
     const [distances, setDistances] = useState([])
     const [invalidZipCode, setInvalidZipCode] = useState()
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
     const storeAPIInfo = {
         zipCode, radiusInMiles,
         stores: locations, setLocations: setLocations,
         distances, setDistances,
-        loading, setLoading
+        loading, setLoading,
+        error, setError
     }
     useEffect(() => {
         if (isValidZipCode(zipCode)) {
@@ -24,9 +26,9 @@ export function useLocations(zipCode, radiusInMiles) {
             setInvalidZipCode(zipCode.length >= 5)
             setLocations([])
         }
-    }, [zipCode, radiusInMiles])
+    }, [zipCode, radiusInMiles, tryAgain])
 
-    return {locations: locations, setLocations: setLocations, invalidZipCode: invalidZipCode, distances: distances, loading: loading}
+    return {locations: locations, setLocations: setLocations, invalidZipCode: invalidZipCode, distances: distances, loading: loading, error:error}
 }
 
 async function makeStoreAPIRequest(info) {
@@ -35,12 +37,15 @@ async function makeStoreAPIRequest(info) {
                           radiusInMiles: info.radiusInMiles,
                           limit: LOCATIONS_LIMIT}
     info.setLoading(true)
+    info.setError(false)
     const locationsResponse = await sendGETAPIRequest(requestBody, getOriginalServerUrl())
     if (locationsResponse) {
         info.setLocations(makeLocationsList(locationsResponse))
         info.setDistances(locationsResponse.distances)
     }
     else {
+        info.setError(true)
+        info.setLoading(false)
         LOG.error(`Locations request to ${getOriginalServerUrl()} failed. Check the log for more details.`, "error")
     }
     info.setLoading(false)

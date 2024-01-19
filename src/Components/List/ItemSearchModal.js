@@ -24,7 +24,7 @@ export default function ItemSearchModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <GroceryListSearch term={itemSearchTerm} setTerm={setItemSearchTerm} searchPressed={searchPressed} setSearchPressed={setSearchPressed} />
-                <ItemSearchResultsTable {...itemsResponse} {...props}/>
+                <ItemSearchResultsTable {...itemsResponse} {...props} searchPressed={searchPressed} setSearchPressed={setSearchPressed}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button
@@ -61,6 +61,13 @@ function ItemSearchResultsTable(props) {
         return (
             <Loading/>
         )
+    }
+    if (props.error) {
+      return (
+        <div className='no-locations-result'>
+          <p>Error Obtaining search results from server.<Button variant='link' size="sm" onClick={() => props.setSearchPressed(!props.searchPressed)}> Try Again</Button></p>
+        </div>
+      )
     }
     if (props.items)
     return(

@@ -15,7 +15,8 @@ import { Loading } from '../../utils/constants'
 export default function StorePicker(props) {
   const [zipCode, setZipCode] = useState("")
   const [radius, setRadius] = useState(50)
-  const {locations, setLocations, invalidZipCode, distances, loading} = useLocations(zipCode, radius)
+  const [tryAgain, setTryAgain] = useState(false)
+  const {locations, setLocations, invalidZipCode, distances, loading, error} = useLocations(zipCode, radius, tryAgain)
   const locationProps = {
     zipCode, setZipCode,
     radius, setRadius,
@@ -26,7 +27,7 @@ export default function StorePicker(props) {
     showList: props.showList, setShowList: props.setShowList,
     groceryList: props.groceryList, setGroceryList: props.setGroceryList,
     distances,
-    loading
+    loading, error, tryAgain, setTryAgain
   }
   return (
     <div className='store-search-page'>
@@ -81,9 +82,20 @@ function StoreRadiusFilter(props) {
 }
 
 function StoreResultsTable(props) {
+  const handleTryAgain = () => {
+    props.setTryAgain(!props.tryAgain)
+  }
   if (props.loading) {
     return (
       <Loading/>
+    )
+  }
+  if (props.error) {
+    return (
+      <div className='store-element-width no-locations-result'>
+        <h2>Error Obtaining grocery store locations from server</h2>
+        <Button variant='light' onClick={() => handleTryAgain()}>Try Again</Button>
+      </div>
     )
   }
   if (!props.loading && !props.invalidZipCode && props.locations.length === 0 && props.zipCode.length === 5) {
