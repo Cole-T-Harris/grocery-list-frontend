@@ -1,0 +1,110 @@
+{
+  "$id": "https://example.com/address.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "locations",
+  "description": "locations response",
+  "type": "object",
+  "properties": {
+    "zipCode.near": {
+      "type": "string",
+      "pattern": "^[0-9]{5}$"
+    },
+    "radiusInMiles": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "limit": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "stores": {
+      "type": "array",
+      "items": {
+          "type": "object",
+          "properties": {
+            "location_id": {
+              "type": "string"
+            },
+            "chain": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "thumbnail": {
+              "type": "string"
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "street_address": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "zipcode": {
+                  "type": "string"
+                },
+                "county": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "street_address",
+                "city",
+                "state",
+                "zipcode",
+                "county"
+              ],
+              "additionalProperties": false
+            },
+            "geolocation": {
+              "type": "object",
+              "properties": {
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "latitude",
+                "longitude"
+              ],
+              "additionalProperties": false
+            }
+          }
+      },
+      "minItems": 0,
+      "required": [
+        "location_id",
+        "chain",
+        "name",
+        "thumbnail",
+        "address",
+        "geolocation"
+      ],
+      "additionalProperties": false
+    },
+    "distances": {
+      "type":"array",
+      "items": {
+        "type":"number"
+      },
+      "minItems":0
+    }
+  },
+  "required": [
+    "zipCode.near",
+    "radiusInMiles",
+    "limit",
+    "stores",
+    "distances"
+  ],
+  "additionalProperties": false
+}

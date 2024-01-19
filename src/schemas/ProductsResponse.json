@@ -1,0 +1,171 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "locations",
+    "description": "locations response",
+    "type": "object",
+    "properties": {
+      "term": {
+        "type": "string"
+      },
+      "locationId": {
+        "type": "string",
+        "pattern": "^[0-9]+$"
+      },
+      "start": {
+        "type": "string",
+        "pattern": "^[0-9]+$"
+      },
+      "limit": {
+        "type": "string",
+        "pattern": "^[0-9]+$"
+      },
+      "products": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "productId": {
+                    "type": "string"
+                    },
+              "aisleLocations": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "bayNumber" : {
+                            "type": "string"
+                        },
+                        "description" : {
+                            "type": "string"
+                        },
+                        "number" : {
+                            "type": "string"
+                        },
+                        "numberOfFacings" : {
+                            "type": "string"
+                        },
+                        "side" : {
+                            "type": "string"
+                        },
+                        "shelfNumber" : {
+                            "type": "string"
+                        },
+                        "shelfPositionInBay" : {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+              },
+              "brand": {
+                "type": "string"
+              },
+              "countryOfOrigin": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "images": {
+                "type": "object",
+                "properties": {
+                    "thumbnail": {
+                        "type": "string"
+                    },
+                    "frontImage": {
+                        "type": "string"
+                    },
+                    "backImage": {
+                        "type": "string"
+                    },
+                    "rightImage": {
+                        "type": "string"
+                    },
+                    "leftImage": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "thumbnail",
+                    "frontImage",
+                    "backImage",
+                    "rightImage",
+                    "leftImage"
+                  ],
+                  "additionalProperties": false
+              },
+              "stock": {
+                "type": "string"
+              },
+              "prices": {
+                "type": "object",
+                "properties": {
+                  "price": {
+                    "type": "number"
+                  },
+                  "promo": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "price",
+                  "promo"
+                ],
+                "additionalProperties": false
+              },
+              "size": {
+                "type": "string"
+              },
+              "priceSize": {
+                "type": "string"
+              }
+            }
+        },
+        "minItems": 0,
+        "required": [
+          "aisleLocations",
+          "brand",
+          "countryOfOrigin",
+          "description",
+          "images",
+          "stock",
+          "prices",
+          "size",
+          "priceSize"
+        ],
+        "additionalProperties": false
+      },
+      "meta": {
+        "type":"object",
+        "properties": {
+            "pagination": {
+                "type": "object",
+                "properties": {
+                    "start": {
+                        "type": "number"
+                    },
+                    "limit": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "additionalProperties": false
+        },
+        "additionalProperties": false
+      }
+    },
+    "required": [
+        "term",
+        "locationId",
+        "start",
+        "limit",
+        "products",
+        "meta"
+    ],
+    "additionalProperties": false
+  }

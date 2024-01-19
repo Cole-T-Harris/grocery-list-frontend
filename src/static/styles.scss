@@ -1,0 +1,192 @@
+$base-color: #EAFBEA;
+$secondary-color: #6F9A8D;
+$third-color: #1F6650;
+$accent-color: #EA5E5E;
+
+.app-background {
+    background-color: $base-color;
+}
+
+.body {
+    position: relative;
+    z-index: 1;
+}
+
+.circular-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5em; /* Adjust the width as needed */
+    height: 2.5em; /* Adjust the height as needed */
+    border-radius: 50%;
+    background-color: $accent-color;
+}
+
+.circular-icon:hover {
+    background-color: #ff6f6f;
+}
+
+.grocery-item-search-button {
+    background-color: $third-color;
+    color: white;
+    border: $third-color;
+}
+
+.grocery-item-search-button:hover {
+    background-color: $secondary-color;
+    border: $secondary-color;
+}
+
+
+.grocery-list-header {
+    background-color: $third-color;
+    color: white;
+}
+
+.grocery-list-additional-background-left {
+    background-color: $base-color;
+    padding: 10px;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.grocery-list-additional-background-right {
+    background-color: $base-color;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: black;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.header{
+    text-align: right;
+}
+
+.header-icon {
+    margin: 3% 5% 0 5%;
+}
+
+.hoverable-row:hover {
+    background-color: $third-color;
+    color: white;
+    cursor: pointer;
+}
+
+.no-locations-result {
+    padding-top: 10px;
+}
+
+.non-hoverable-row:hover {
+    box-shadow: none !important;
+}
+
+.product-thumbnail-size {
+    max-width: 50px; /* Set the maximum width to 50 pixels */
+    max-height: 50px; /* Set the maximum height to 50 pixels */
+    width: auto; /* Automatically adjust width while maintaining aspect ratio */
+    height: auto; /* Automatically adjust height while maintaining aspect ratio */
+}
+
+.rounded-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .rounded-table th,
+  .rounded-table td {
+    padding: 8px;
+    color: white;
+  }
+  
+  /* Round corners for the first and last child of the table header */
+  .rounded-table thead tr th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .rounded-table thead tr th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .rounded-table tbody tr {
+    background-color: $secondary-color;
+  }
+
+.share-buttons-styling {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.share-button {
+    color: white;
+}
+
+.store-element-width {
+    width: 92%;
+    margin: auto;
+}
+
+.store-hours-table-td {
+    padding-left: 0 !important;
+}
+
+.store-input-style {
+    background-color: $third-color;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+}
+
+.store-search-page {
+    padding: 20% 0;
+    text-align: center !important;
+}
+
+.store-table-styling{
+    text-align: left;
+}
+
+.store-right-column {
+    text-align: right;
+    width: 117px;
+}
+
+.table-spacer {
+    background-color: $base-color !important;
+}
+
+.table-store-data {
+    background-color: $secondary-color;
+}
+
+table.stores-table td {
+    border-radius: 10px;
+    color: white;
+}
+
+table.stores-row-table {
+    margin-bottom: 0;
+}
+
+td {
+    border: 0;
+}
+
+@media (max-width: 767px) { /* Adjust the max-width as needed for your mobile breakpoint */
+    .grocery-list-additional-background-left,
+    .grocery-list-additional-background-right {
+        margin: 10px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .store-element-width {
+        width: 50%;
+    }
+
+}
