@@ -40,6 +40,7 @@ $accent-color: #EA5E5E;
 
 .grocery-list-header {
     background-color: $third-color;
+    --bs-table-bg: $secondary-color $third-color;
     color: white;
 }
 
@@ -115,6 +116,8 @@ $accent-color: #EA5E5E;
 
   .rounded-table tbody tr {
     background-color: $secondary-color;
+    --bs-table-bg: $secondary-color $secondary-color;
+    
   }
 
 .share-buttons-styling {
@@ -168,7 +171,6 @@ $accent-color: #EA5E5E;
 
 .table-store-data td {
     background-color: inherit;
-    // --bs-table-bg: $secondary-color !important;
 }
 
 table.stores-table td {
