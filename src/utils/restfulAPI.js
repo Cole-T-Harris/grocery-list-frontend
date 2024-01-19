@@ -44,11 +44,7 @@ async function sendGETRequest(requestBody, serverUrl) {
 }
 
 export function getOriginalServerUrl() {
-    // const serverProtocol = location.protocol;
-    // const serverHost = location.hostname;
-    // const serverPort = location.port;
-    // return `${serverProtocol}//${serverHost}:${serverPort}`;
-    return "http://localhost:8000"
+    return process.env.REACT_APP_SERVER_URL || "http://localhost:8000"
 }
 
 export function isJsonResponseValid(object, schema) {
