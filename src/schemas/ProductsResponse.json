@@ -9,16 +9,13 @@
         "type": "string"
       },
       "locationId": {
-        "type": "string",
-        "pattern": "^[0-9]+$"
+        "type": "number"
       },
       "start": {
-        "type": "string",
-        "pattern": "^[0-9]+$"
+        "type": "number"
       },
       "limit": {
-        "type": "string",
-        "pattern": "^[0-9]+$"
+        "type": "number"
       },
       "products": {
         "type": "array",

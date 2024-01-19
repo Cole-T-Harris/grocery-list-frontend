@@ -14,7 +14,9 @@ export function useItems(storeID, term, offset, searchForItems) {
         loading, setLoading
     }
     useEffect(() => {
-        makeItemAPIRequest(itemAPIInfo)
+        if (term.length > 0) {
+            makeItemAPIRequest(itemAPIInfo)
+        }
     }, [searchForItems])
 
     return {items, setItems, totalResults, loading}

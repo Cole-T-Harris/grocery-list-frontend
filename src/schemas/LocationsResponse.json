@@ -5,17 +5,14 @@
   "description": "locations response",
   "type": "object",
   "properties": {
-    "zipCode.near": {
-      "type": "string",
-      "pattern": "^[0-9]{5}$"
+    "zipcode": {
+      "type": "number"
     },
     "radiusInMiles": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
+      "type": "number"
     },
     "limit": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
+      "type": "number"
     },
     "stores": {
       "type": "array",
@@ -37,7 +34,7 @@
             "address": {
               "type": "object",
               "properties": {
-                "street_address": {
+                "addressLine1": {
                   "type": "string"
                 },
                 "city": {
@@ -46,7 +43,7 @@
                 "state": {
                   "type": "string"
                 },
-                "zipcode": {
+                "zipCode": {
                   "type": "string"
                 },
                 "county": {
@@ -54,10 +51,10 @@
                 }
               },
               "required": [
-                "street_address",
+                "addressLine1",
                 "city",
                 "state",
-                "zipcode",
+                "zipCode",
                 "county"
               ],
               "additionalProperties": false
@@ -77,6 +74,9 @@
                 "longitude"
               ],
               "additionalProperties": false
+            },
+            "distance": {
+              "type": "number"
             }
           }
       },
@@ -87,24 +87,17 @@
         "name",
         "thumbnail",
         "address",
-        "geolocation"
+        "geolocation",
+        "distance"
       ],
       "additionalProperties": false
-    },
-    "distances": {
-      "type":"array",
-      "items": {
-        "type":"number"
-      },
-      "minItems":0
     }
   },
   "required": [
-    "zipCode.near",
+    "zipcode",
     "radiusInMiles",
     "limit",
-    "stores",
-    "distances"
+    "stores"
   ],
   "additionalProperties": false
 }

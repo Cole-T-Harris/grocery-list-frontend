@@ -105,7 +105,6 @@ function StoreResultsTable(props) {
               key = {`table-${JSON.stringify(location)}`}
               location = {location}
               index = {index}
-              distance = {props.distances[index]}
             />
           ))}
         </tbody>
@@ -145,7 +144,7 @@ function StoreResultsRow(props) {
                 <td>
                   <img src={props.location.thumbnail}/> <strong>{props.location.name}</strong>
                   <div>
-                    {props.distance.toFixed(2)} miles
+                    {props.location.distance.toFixed(2)} miles
                   </div>
                 </td>
                 <td className='store-right-column'>

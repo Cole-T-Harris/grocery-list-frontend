@@ -52,7 +52,6 @@ export function getOriginalServerUrl() {
 }
 
 export function isJsonResponseValid(object, schema) {
-    console.log(object)
     if (object && schema) {
         const anotherJsonValidator = new Ajv();
         const validate = anotherJsonValidator.compile(schema);

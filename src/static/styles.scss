@@ -158,10 +158,17 @@ $accent-color: #EA5E5E;
 
 .table-spacer {
     background-color: $base-color !important;
+    --bs-table-bg: $base-color !important;
 }
 
 .table-store-data {
     background-color: $secondary-color;
+    --bs-table-bg: $secondary-color !important;
+}
+
+.table-store-data td {
+    background-color: inherit;
+    // --bs-table-bg: $secondary-color !important;
 }
 
 table.stores-table td {
