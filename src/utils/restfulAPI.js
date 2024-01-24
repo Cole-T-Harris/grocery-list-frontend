@@ -44,8 +44,15 @@ async function sendGETRequest(requestBody, serverUrl) {
 }
 
 export function getOriginalServerUrl() {
-    return process.env.REACT_APP_SERVER_URL || "http://localhost:8000"
-}
+    if (process.env.NODE_ENV === 'development') {
+      // Development environment
+      return "http://localhost:8000";
+    } else {
+      // Production environment
+      return "http://www.coleharris.dev";
+    }
+  }
+  
 
 export function isJsonResponseValid(object, schema) {
     if (object && schema) {
@@ -61,7 +68,7 @@ function getRequestURL(requestBody, serverUrl) {
     // let requestURL = `${serverUrl}/api/${requestBody.requestType}/?`
     let requestURL = `${serverUrl}/${requestBody.requestType}/?`
     for (const filter of Object.keys(requestBody)) {
-        if (filter != "requestType") {
+        if (filter !== "requestType") {
             requestURL += filter + "=" + requestBody[filter] + "&"
         }
     }

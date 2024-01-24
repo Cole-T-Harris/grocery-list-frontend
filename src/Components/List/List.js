@@ -103,7 +103,7 @@ function GroceryListTable(props) {
       <div>
         <h2>Grocery List is Empty</h2>
         <p>To add items to list, select the <FaSearchPlus style={{color: ACCENT_COLOR}}/> button</p>
-        <img src={EmptyListIcon} />
+        <img src={EmptyListIcon} alt=''/>
       </div>
     )
   }

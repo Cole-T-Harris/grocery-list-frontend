@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getOriginalServerUrl, sendGETAPIRequest } from "../utils/restfulAPI";
 import { LOCATIONS_LIMIT, LOG, ZIPCODE_REGEX } from "../utils/constants";
 import { Location } from "../models/location.model";

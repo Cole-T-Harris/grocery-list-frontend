@@ -103,7 +103,7 @@ function StoreResultsTable(props) {
       <div className='store-element-width no-locations-result'>
         <h2>No locations found.</h2>
         <p>Try increasing radius or searching a different zipcode.</p>
-        <img src={NoLocation}/>
+        <img src={NoLocation} alt=''/>
       </div>
     )
   }
@@ -154,7 +154,7 @@ function StoreResultsRow(props) {
             <tbody>
               <tr>
                 <td>
-                  <img src={props.location.thumbnail}/> <strong>{props.location.name}</strong>
+                  <img src={props.location.thumbnail} alt=''/> <strong>{props.location.name}</strong>
                   <div>
                     {props.location.distance.toFixed(2)} miles
                   </div>
