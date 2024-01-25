@@ -1,10 +1,3 @@
-name: Build and Deploy to S3
-
-on:
-  push:
-    branches:
-      - main
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -24,18 +17,11 @@ jobs:
     - name: Build React app
       run: npm run build
 
-    - name: Debug Output
-      run: |
-        ls -R grocery_app
-
     - name: Deploy to S3
-      uses: jakejarvis/s3-sync-action@v0.5.0
-      with:
-        args: --follow-symlinks --delete
-        SOURCE_DIR: ./grocery_app
+      run: |
+        aws s3 sync grocery_app s3://${{ secrets.AWS_S3_BUCKET }} --delete
       env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
       if: success()
