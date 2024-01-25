@@ -1,15 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV === 'production';
-console.log(process.env.NODE_ENV)
-
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build'),
-    publicPath: isProduction ? '/grocery_app/': '/', 
+    path: path.resolve(__dirname, 'grocery_app'),
+    publicPath: process.env.NODE_ENV === 'production' ? '/grocery_app/' : '/', 
   },
   module: {
     rules: [
