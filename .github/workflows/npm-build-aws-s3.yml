@@ -28,7 +28,7 @@ jobs:
       uses: jakejarvis/s3-sync-action@v0.5.0
       with:
         args: --follow-symlinks --delete
-        SOURCE_DIR: grocery_app
+        SOURCE_DIR: /grocery_app
       env:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
