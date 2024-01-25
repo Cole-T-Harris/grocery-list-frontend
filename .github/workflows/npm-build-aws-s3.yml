@@ -26,7 +26,6 @@ jobs:
 
     - name: Debug Output
       run: |
-        ls -R
         ls -R grocery_app
 
     - name: Deploy to S3
