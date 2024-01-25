@@ -25,9 +25,9 @@ jobs:
       run: npm run build
 
     - name: Debug Output
-    run: |
-      ls -R
-      ls -R grocery_app
+      run: |
+        ls -R
+        ls -R grocery_app
 
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@v0.5.0
