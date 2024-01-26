@@ -49,7 +49,7 @@ export function getOriginalServerUrl() {
       return "http://localhost:8000";
     } else {
       // Production environment
-      return "http://www.coleharris.dev";
+      return "https://d3hkh53fn525s5.cloudfront.net";
     }
   }
   
