@@ -49,7 +49,7 @@ export function getOriginalServerUrl() {
       return "http://localhost:8000";
     } else {
       // Production environment
-      return "https://ec2-54-208-31-106.compute-1.amazonaws.com";
+      return "https://api.coleharris.dev";
     }
   }
   
@@ -66,7 +66,7 @@ export function isJsonResponseValid(object, schema) {
 
 function getRequestURL(requestBody, serverUrl) {
     // let requestURL = `${serverUrl}/api/${requestBody.requestType}/?`
-    let requestURL = `${serverUrl}/api/${requestBody.requestType}/?`
+    let requestURL = `${serverUrl}/${requestBody.requestType}/?`
     for (const filter of Object.keys(requestBody)) {
         if (filter !== "requestType") {
             requestURL += filter + "=" + requestBody[filter] + "&"
