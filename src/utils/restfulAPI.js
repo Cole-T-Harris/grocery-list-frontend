@@ -66,7 +66,7 @@ export function isJsonResponseValid(object, schema) {
 
 function getRequestURL(requestBody, serverUrl) {
     // let requestURL = `${serverUrl}/api/${requestBody.requestType}/?`
-    let requestURL = `${serverUrl}/${requestBody.requestType}/?`
+    let requestURL = `${serverUrl}/api/${requestBody.requestType}/?`
     for (const filter of Object.keys(requestBody)) {
         if (filter !== "requestType") {
             requestURL += filter + "=" + requestBody[filter] + "&"
