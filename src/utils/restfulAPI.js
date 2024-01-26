@@ -49,7 +49,7 @@ export function getOriginalServerUrl() {
       return "http://localhost:8000";
     } else {
       // Production environment
-      return "https://d3hkh53fn525s5.cloudfront.net";
+      return "https://ec2-54-208-31-106.compute-1.amazonaws.com";
     }
   }
   
