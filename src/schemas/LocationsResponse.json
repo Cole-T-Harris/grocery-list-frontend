@@ -3,6 +3,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "locations",
   "description": "locations response",
+  "additionalProperties": false,
   "type": "object",
   "properties": {
     "zipcode": {
@@ -17,87 +18,100 @@
     "stores": {
       "type": "array",
       "items": {
-          "type": "object",
-          "properties": {
-            "location_id": {
-              "type": "string"
-            },
-            "chain": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "thumbnail": {
-              "type": "string"
-            },
-            "address": {
-              "type": "object",
-              "properties": {
-                "addressLine1": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "zipCode": {
-                  "type": "string"
-                },
-                "county": {
-                  "type": "string"
-                }
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string"
+          },
+          "chain": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "hours": {
+            "type": "object",
+            "properties": {
+              "monday": {
+                "type": "object"
               },
-              "required": [
-                "addressLine1",
-                "city",
-                "state",
-                "zipCode",
-                "county"
-              ],
-              "additionalProperties": false
-            },
-            "geolocation": {
-              "type": "object",
-              "properties": {
-                "latitude": {
-                  "type": "number"
-                },
-                "longitude": {
-                  "type": "number"
-                }
+              "tuesday": {
+                "type": "object"
               },
-              "required": [
-                "latitude",
-                "longitude"
-              ],
-              "additionalProperties": false
+              "wednesday": {
+                "type": "object"
+              },
+              "thursday": {
+                "type": "object"
+              },
+              "friday": {
+                "type": "object"
+              },
+              "saturday": {
+                "type": "object"
+              },
+              "sunday": {
+                "type": "object"
+              }
             },
-            "distance": {
-              "type": "number"
-            }
+            "required": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+          },
+          "address": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "addressLine1": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "county": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "addressLine1",
+              "city",
+              "state",
+              "zipCode",
+              "county"
+            ]
+          },
+          "geolocation": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "latitude",
+              "longitude"
+            ]
+          },
+          "distance": {
+            "type": "number"
           }
+        },
+        "required": ["locationId", "chain", "name", "thumbnail", "address", "hours", "geolocation", "distance"]
       },
-      "minItems": 0,
-      "required": [
-        "location_id",
-        "chain",
-        "name",
-        "thumbnail",
-        "address",
-        "geolocation",
-        "distance"
-      ],
-      "additionalProperties": false
+      "minItems": 0
     }
   },
-  "required": [
-    "zipcode",
-    "radiusInMiles",
-    "limit",
-    "stores"
-  ],
-  "additionalProperties": false
+  "required": ["zipcode", "radiusInMiles", "limit", "stores"]
 }

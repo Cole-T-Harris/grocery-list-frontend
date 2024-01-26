@@ -60,7 +60,7 @@ export function isJsonResponseValid(object, schema) {
         const validate = anotherJsonValidator.compile(schema);
         return validate(object);
     }
-    LOG.error(`bad arguments - isJsonResponseValid(object: ${object}, schema: ${schema})`);
+    LOG.error(`bad arguments - isJsonResponseValid(object: ${JSON.stringify(object)}, schema: ${JSON.stringify(schema)})`);
     return false;
 }
 

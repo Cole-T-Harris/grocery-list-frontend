@@ -3,6 +3,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "locations",
     "description": "locations response",
+    "additionalProperties": false,
     "type": "object",
     "properties": {
       "term": {
@@ -20,123 +21,125 @@
       "products": {
         "type": "array",
         "items": {
+            "additionalProperties": false,
             "type": "object",
             "properties": {
                 "productId": {
                     "type": "string"
                     },
-              "aisleLocations": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "bayNumber" : {
-                            "type": "string"
-                        },
-                        "description" : {
-                            "type": "string"
-                        },
-                        "number" : {
-                            "type": "string"
-                        },
-                        "numberOfFacings" : {
-                            "type": "string"
-                        },
-                        "side" : {
-                            "type": "string"
-                        },
-                        "shelfNumber" : {
-                            "type": "string"
-                        },
-                        "shelfPositionInBay" : {
-                            "type": "string"
-                        }
-                    },
-                    "additionalProperties": false
+            "aisleLocations": {
+              "type": "array",
+              "items": {
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                  "bayNumber" : {
+                      "type": "string"
+                  },
+                  "description" : {
+                      "type": "string"
+                  },
+                  "number" : {
+                      "type": "string"
+                  },
+                  "numberOfFacings" : {
+                      "type": "string"
+                  },
+                  "side" : {
+                      "type": "string"
+                  },
+                  "shelfNumber" : {
+                      "type": "string"
+                  },
+                  "shelfPositionInBay" : {
+                      "type": "string"
+                  }
+                }
+              }
+            },
+            "brand": {
+              "type": "string"
+            },
+            "countryOfOrigin": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "images": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "thumbnail": {
+                    "type": "string"
+                },
+                "frontImage": {
+                    "type": "string"
+                },
+                "backImage": {
+                    "type": "string"
+                },
+                "rightImage": {
+                    "type": "string"
+                },
+                "leftImage": {
+                    "type": "string"
                 }
               },
-              "brand": {
-                "type": "string"
-              },
-              "countryOfOrigin": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "images": {
-                "type": "object",
-                "properties": {
-                    "thumbnail": {
-                        "type": "string"
-                    },
-                    "frontImage": {
-                        "type": "string"
-                    },
-                    "backImage": {
-                        "type": "string"
-                    },
-                    "rightImage": {
-                        "type": "string"
-                    },
-                    "leftImage": {
-                        "type": "string"
-                    }
+              "required": [
+                  "thumbnail",
+                  "frontImage",
+                  "backImage",
+                  "rightImage",
+                  "leftImage"
+              ]
+            },
+            "stock": {
+              "type": "string"
+            },
+            "prices": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "price": {
+                  "type": "number"
                 },
-                "required": [
-                    "thumbnail",
-                    "frontImage",
-                    "backImage",
-                    "rightImage",
-                    "leftImage"
-                  ],
-                  "additionalProperties": false
+                "promo": {
+                  "type": "number"
+                }
               },
-              "stock": {
-                "type": "string"
-              },
-              "prices": {
-                "type": "object",
-                "properties": {
-                  "price": {
-                    "type": "number"
-                  },
-                  "promo": {
-                    "type": "number"
-                  }
-                },
-                "required": [
-                  "price",
-                  "promo"
-                ],
-                "additionalProperties": false
-              },
-              "size": {
-                "type": "string"
-              },
-              "priceSize": {
-                "type": "string"
-              }
+              "required": [
+                "price",
+                "promo"
+              ]
+            },
+            "size": {
+              "type": "string"
+            },
+            "priceSize": {
+              "type": "string"
             }
+          },
+          "required": [
+            "aisleLocations",
+            "brand",
+            "countryOfOrigin",
+            "description",
+            "images",
+            "stock",
+            "prices",
+            "size",
+            "priceSize"
+          ]
         },
-        "minItems": 0,
-        "required": [
-          "aisleLocations",
-          "brand",
-          "countryOfOrigin",
-          "description",
-          "images",
-          "stock",
-          "prices",
-          "size",
-          "priceSize"
-        ],
-        "additionalProperties": false
+        "minItems": 0
       },
       "meta": {
+        "additionalProperties": false,
         "type":"object",
         "properties": {
             "pagination": {
+                "additionalProperties": false,
                 "type": "object",
                 "properties": {
                     "start": {
@@ -148,12 +151,9 @@
                     "total": {
                         "type": "number"
                     }
-                },
-                "additionalProperties": false
-            },
-            "additionalProperties": false
-        },
-        "additionalProperties": false
+                }
+            }
+        }
       }
     },
     "required": [
@@ -163,6 +163,5 @@
         "limit",
         "products",
         "meta"
-    ],
-    "additionalProperties": false
+    ]
   }
