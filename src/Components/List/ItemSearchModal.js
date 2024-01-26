@@ -6,14 +6,15 @@ import Modal from 'react-bootstrap/Modal'
 import { useItems } from "../../hooks/useItems";
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
-import { Loading } from '../../utils/constants'
+import { ITEMS_LIMIT, Loading } from '../../utils/constants'
 import { FaPlus, FaMinus } from "react-icons/fa"
 
 export default function ItemSearchModal(props) {
     const handleClose = () => props.setShowItemSearch(false)
     const [searchPressed, setSearchPressed] = useState(false)
     const [itemSearchTerm, setItemSearchTerm] = useState("")
-    const itemsResponse = useItems(props.storeID, itemSearchTerm, 0, searchPressed)
+    const [offset, setOffset] = useState(0)
+    const itemsResponse = useItems(props.storeID, itemSearchTerm, offset, searchPressed)
     return (
         <Modal 
             show={props.showItemSearch}
@@ -24,7 +25,18 @@ export default function ItemSearchModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <GroceryListSearch term={itemSearchTerm} setTerm={setItemSearchTerm} searchPressed={searchPressed} setSearchPressed={setSearchPressed} />
-                <ItemSearchResultsTable {...itemsResponse} {...props} searchPressed={searchPressed} setSearchPressed={setSearchPressed}/>
+                <ItemSearchResultsTable 
+                  {...itemsResponse} 
+                  {...props}
+                />
+                <ItemSearchResultsViewMore
+                  {...itemsResponse} 
+                  {...props}
+                  offset={offset} 
+                  setOffset={setOffset} 
+                  searchPressed={searchPressed} 
+                  setSearchPressed={setSearchPressed}
+                />
             </Modal.Body>
             <Modal.Footer>
                 <Button
@@ -57,34 +69,59 @@ function GroceryListSearch(props) {
 }
 
 function ItemSearchResultsTable(props) {
-    if (props.loading) {
-        return (
-            <Loading/>
-        )
-    }
-    if (props.error) {
-      return (
-        <div className='no-locations-result'>
-          <p>Error Obtaining search results from server.<Button variant='link' size="sm" onClick={() => props.setSearchPressed(!props.searchPressed)}> Try Again</Button></p>
-        </div>
-      )
-    }
     if (props.items)
-    return(
-        <Table striped>
-            <thead></thead>
-            <tbody>
-                {props.items.map((product, index) => (
-                    <ItemSearchResultsTableRow
-                        product={product}
-                        groceryList={props.groceryList}
-                        setGroceryList={props.setGroceryList}
-                        key={`${product.productId}`}
-                    />
-                ))}
-            </tbody>
-        </Table>
+      return(
+          <Table striped>
+              <thead></thead>
+              <tbody>
+                  {props.items.map((product, index) => (
+                      <ItemSearchResultsTableRow
+                          product={product}
+                          groceryList={props.groceryList}
+                          setGroceryList={props.setGroceryList}
+                          key={`${product.productId}`}
+                      />
+                  ))}
+              </tbody>
+          </Table>
+      )
+}
+
+function ItemSearchResultsViewMore(props) {
+  const isMorePages = () => {
+    return !props.loading && props.items.length > 0 && props.totalResults > 0 && props.totalResults > (props.offset + ITEMS_LIMIT) 
+  }
+  const handleViewMore = () => {
+    props.setOffset(props.offset + ITEMS_LIMIT)
+    props.setSearchPressed(!props.searchPressed)
+  }
+  if (props.error) {
+    return (
+      <div className='no-locations-result'>
+        <p>Error Obtaining search results from server.<Button variant='link' size="sm" onClick={() => props.setSearchPressed(!props.searchPressed)}> Try Again</Button></p>
+      </div>
     )
+  }
+  return (
+    <div className="text-center">
+      {props.loading ? 
+        <Loading/> :
+        <></>
+      }
+      {
+        isMorePages() ? 
+        <Button 
+          variant='link' 
+          size="sm" 
+          onClick={handleViewMore}
+          className="view-more-styling"
+        >View More
+        </Button> 
+        : 
+        <></>
+      }
+    </div>
+  )
 }
 
 function ItemSearchResultsTableRow(props) {

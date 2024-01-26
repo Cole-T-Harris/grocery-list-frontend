@@ -8,15 +8,19 @@ export function useItems(storeID, term, offset, searchForItems) {
     const [totalResults, setTotalResults] = useState(0)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
+    const [previousSearch, setPreviousSearch] = useState("")
+    const [previousOffset, setPreviousOffset] = useState(-1)
     const itemAPIInfo = {
         storeID, term, offset,
         items, setItems,
         totalResults, setTotalResults,
         loading, setLoading,
+        previousSearch, setPreviousSearch,
         error, setError
     }
     useEffect(() => {
-        if (term.length > 0) {
+        if (term.length > 0 && offset !== previousOffset) {
+            setPreviousOffset(offset)
             makeItemAPIRequest(itemAPIInfo)
         }
     }, [searchForItems])
@@ -34,8 +38,9 @@ async function makeItemAPIRequest(info) {
     info.setError(false)
     const itemsResponse = await sendGETAPIRequest(requestBody, getOriginalServerUrl())
     if (itemsResponse) {
-        info.setItems(makeItemsList(itemsResponse))
+        info.setItems(makeItemsList(itemsResponse, info.items, info.term, info.previousSearch))
         info.setTotalResults(itemsResponse.meta.pagination.total)
+        info.setPreviousSearch(info.term)
     }
     else {
         info.setError(true)
@@ -45,8 +50,11 @@ async function makeItemAPIRequest(info) {
     info.setLoading(false)
 }
 
-function makeItemsList(itemsResponse) {
+function makeItemsList(itemsResponse, currentItemsList, term, previousSearch) {
     let items = [];
+    if (term === previousSearch) {
+        items = currentItemsList
+    }
     for (let index in itemsResponse.products) {
         let item = itemsResponse.products[index]
         items.push(new Item(item))

@@ -186,6 +186,14 @@ td {
     border: 0;
 }
 
+.view-more-styling {
+    color: $third-color;
+}
+
+.view-more-styling:hover {
+    color: #1f6650ab;
+}
+
 @media (max-width: 767px) { /* Adjust the max-width as needed for your mobile breakpoint */
     .grocery-list-additional-background-left,
     .grocery-list-additional-background-right {
