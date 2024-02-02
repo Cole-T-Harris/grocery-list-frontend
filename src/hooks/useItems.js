@@ -19,7 +19,7 @@ export function useItems(storeID, term, offset, searchForItems) {
         error, setError
     }
     useEffect(() => {
-        if (term.length > 0 && offset !== previousOffset) {
+        if (term.length > 0 && (offset !== previousOffset || (offset === previousOffset && term !== previousSearch))) {
             setPreviousOffset(offset)
             makeItemAPIRequest(itemAPIInfo)
         }
